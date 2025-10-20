@@ -2,8 +2,11 @@ import cors from 'cors'
 import express from 'express'
 import morgan from 'morgan'
 import helmet from 'helmet'
+import compression from 'compression'
 import cookieParser from 'cookie-parser'
-import routes from '@/routes'
+import 'dotenv/config'
+
+import routes from './src/routes/index.js'
 
 const PORT = parseInt(process.env.APP_PORT || process.env.PORT || '8000')
 const app = express()
@@ -68,7 +71,7 @@ app.use(cookieParser())
 
 // init route
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send(`Hello World! LaPlace API is running... ${process.env.APP_URL}`)
 })
 app.use('', routes)
 
