@@ -8,6 +8,8 @@ import 'dotenv/config'
 
 import routes from './src/routes/index.js'
 
+import db from './src/database/database.js'
+
 const PORT = parseInt(process.env.APP_PORT || process.env.PORT || '8000')
 const app = express()
 
@@ -69,10 +71,16 @@ app.use(express.json({ limit: '10kb' }))
 app.use(express.urlencoded({ extended: true, limit: '10kb' }))
 app.use(cookieParser())
 
+// init db
+;(async () => {
+  await db.connect()
+})()
+
 // init route
 app.get('/', (req, res) => {
   res.send(`Hello World! LaPlace API is running... ${process.env.APP_URL}`)
 })
+
 app.use('', routes)
 
 app.listen(PORT, '0.0.0.0', () => {
