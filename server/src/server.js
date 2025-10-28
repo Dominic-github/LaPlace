@@ -6,9 +6,9 @@ import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import 'dotenv/config'
 
-import routes from './src/routes/index.js'
+import routes from './routes/index.js'
 
-import db from './src/database/database.js'
+import db from './database/database.js'
 
 const PORT = parseInt(process.env.APP_PORT || process.env.PORT || '8000')
 const app = express()

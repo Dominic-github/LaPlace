@@ -1,8 +1,8 @@
-import catchAsync from '../helpers/catchAsync'
-import { Api403Error, Api404Error, Api401Error } from '../core/error'
-import TokenService from '../services/token'
-import { URL_WHITELIST } from '../config/index'
-import { verifyJwt, extractToken, parseJwt } from '../helpers/jwt'
+import catchAsync from '@/helpers/catchAsync.js'
+import { Api403Error, Api404Error, Api401Error } from '../core/error.js'
+import TokenService from '@/services/token.js'
+import { URL_WHITELIST } from '@/config/index.js'
+import { verifyJwt, extractToken, parseJwt } from '../helpers/jwt.js'
 
 const HEADER = {
   API_KEY: 'x-api-key',

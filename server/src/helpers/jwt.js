@@ -1,5 +1,5 @@
 import JWT from 'jsonwebtoken'
-import { VerifyErrors } from 'jsonwebtoken'
+// import { VerifyErrors } from 'jsonwebtoken'
 
 const HEADER = {
   API_KEY: 'x-api-key',

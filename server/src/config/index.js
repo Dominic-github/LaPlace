@@ -1,1 +1,1 @@
-const URL_WHITELIST = []
+export const URL_WHITELIST = []
