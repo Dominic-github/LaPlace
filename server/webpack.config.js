@@ -16,12 +16,10 @@ export default (env, argv) => {
       filename: 'main.js',
       clean: true
     },
-    watch: true,
     target: 'node',
     externals: [
       nodeExternals({
-        // Thêm vào đây các module CommonJS cần xử lý
-        allowlist: ['cors', 'express']
+        allowlist: [/^@/, 'cors', 'express', 'mysql2', 'dotenv']
       })
     ],
     module: {
@@ -32,7 +30,14 @@ export default (env, argv) => {
           use: {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/preset-env']
+              presets: [
+                [
+                  '@babel/preset-env',
+                  {
+                    targets: { node: 'current' }
+                  }
+                ]
+              ]
             }
           }
         }
@@ -41,7 +46,8 @@ export default (env, argv) => {
     resolve: {
       alias: {
         '@': path.resolve(__dirname, 'src/')
-      }
+      },
+      extensions: ['.js', '.json']
     }
   }
 }

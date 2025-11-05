@@ -6,9 +6,9 @@ import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import 'dotenv/config'
 
-import routes from './routes/index.js'
+import connectDB from './database/connect.js'
 
-import db from './database/database.js'
+import routes from './routes/index.js'
 
 const PORT = parseInt(process.env.APP_PORT || process.env.PORT || '8000')
 const app = express()
@@ -71,10 +71,8 @@ app.use(express.json({ limit: '10kb' }))
 app.use(express.urlencoded({ extended: true, limit: '10kb' }))
 app.use(cookieParser())
 
-// init db
-;(async () => {
-  await db.connect()
-})()
+// connect to database
+connectDB()
 
 // init route
 app.get('/', (req, res) => {
