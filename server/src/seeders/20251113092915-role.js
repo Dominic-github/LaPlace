@@ -1,33 +1,93 @@
 'use strict'
+const { default: role } = require('@/services/role')
 const { v4: uuidv4 } = require('uuid')
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
+
+
+    const adminPerms = [
+      'user_view',
+      'user_add',
+      'user_edit',
+      'user_delete',
+
+      'role_view',
+      'role_add',
+      'role_edit',
+      'role_delete',
+
+      'permission_view',
+      'permission_add',
+      'permission_edit',
+      'permission_delete',
+
+      'report_view',
+      'report_add',
+      'report_edit',
+      'report_delete',
+
+      'booking_view',
+      'booking_add',
+      'booking_edit',
+      'booking_delete',
+
+      'accommodation_view',
+
+      'payment_view',
+
+    ]
     const userPerms = [
-      'view_properties',
-      'book_property',
-      'cancel_booking',
-      'add_review',
+      'accommodation_view',
+
+      'booking_view',
+      'booking_add',
+      'booking_edit',
+      'booking_delete',
+
+      'review_view',
+      'review_add',
+      'review_edit',
+      'review_delete',
+
       'view_own_contracts',
       'manage_profile'
     ]
 
     // landlord permissions
     const landlordPerms = [
-      'create_property',
-      'edit_property',
-      'delete_property',
-      'view_property_bookings',
-      'approve_booking',
-      'reject_booking',
-      'view_tenant_reviews',
-      'manage_own_payments'
+      'accommodation_view',
+      'accommodation_add',
+      'accommodation_edit',
+      'accommodation_delete',
+
+      'booking_view',
+      'booking_edit',
+      'booking_delete',
+
+      'payment_view',
+      'payment_add',
+      'payment_edit',
+      'payment_delete',
+
+      'review_view',
+      'user_view',
+
+      'contract_view',
+      'contract_add',
+      'contract_edit',
+      'contract_delete',
     ]
 
     const brokerPerms = [
-      'view_property_bookings',
-      'approve_booking',
-      'reject_booking'
+      'review_view',
+      'user_view',
+
+      'booking_view',
+      'booking_add',
+      'booking_edit',
+      'booking_delete',
+
     ]
 
     const roleIds = {
@@ -38,28 +98,52 @@ module.exports = {
     }
 
     const permissionIds = {
-      view_properties: uuidv4(),
-      book_property: uuidv4(),
-      cancel_booking: uuidv4(),
-      add_review: uuidv4(),
-      view_own_contracts: uuidv4(),
-      manage_profile: uuidv4(),
-      create_property: uuidv4(),
-      edit_property: uuidv4(),
-      delete_property: uuidv4(),
-      view_property_bookings: uuidv4(),
-      approve_booking: uuidv4(),
-      reject_booking: uuidv4(),
-      view_tenant_reviews: uuidv4(),
-      manage_own_payments: uuidv4(),
-      manage_users: uuidv4(),
-      manage_roles: uuidv4(),
-      manage_permissions: uuidv4(),
-      view_reports: uuidv4(),
-      delete_reviews: uuidv4(),
-      approve_landlord: uuidv4(),
-      manage_all_properties: uuidv4(),
-      manage_payments: uuidv4()
+      user_view: uuidv4(),
+      user_add: uuidv4(),
+      user_edit: uuidv4(),
+      user_delete: uuidv4(),
+
+      role_view: uuidv4(),
+      role_add: uuidv4(),
+      role_edit: uuidv4(),
+      role_delete: uuidv4(),
+
+      permission_view: uuidv4(),
+      permission_add: uuidv4(),
+      permission_edit: uuidv4(),
+      permission_delete: uuidv4(),
+
+      report_view: uuidv4(),
+      report_add: uuidv4(),
+      report_edit: uuidv4(),
+      review_delete: uuidv4(),
+
+      booking_view: uuidv4(),
+      booking_add: uuidv4(),
+      booking_edit: uuidv4(),
+      booking_delete: uuidv4(),
+
+      accommodation_view: uuidv4(),
+      accommodation_add: uuidv4(),
+      accommodation_update: uuidv4(),
+      accommodation_delete: uuidv4(),
+
+      setting: uuidv4(),
+
+      payment_view: uuidv4(),
+      payment_add: uuidv4(),
+      payment_edit: uuidv4(),
+      payment_delete: uuidv4(),
+
+      landlord_view: uuidv4(),
+      landlord_add: uuidv4(),
+      landlord_edit: uuidv4(),
+      landlord_delete: uuidv4(),
+
+      broker_view: uuidv4(),
+      broker_add: uuidv4(),
+      broker_edit: uuidv4(),
+      broker_delete: uuidv4(),
     }
 
     // --- Insert roles ---
