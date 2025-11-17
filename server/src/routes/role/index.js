@@ -1,6 +1,6 @@
 import express from 'express'
 const router = express.Router()
-import role from '@/controlers/role'
+import roleController from '@/controlers/role'
 import {
   authentication,
   checkPermission
@@ -10,6 +10,6 @@ import {
 
 router.use(authentication)
 
-router.get('/', checkPermission('*'), role.getAllRoles)
+router.get('/', checkPermission('*'), roleController.getAllRoles)
 
 export default router

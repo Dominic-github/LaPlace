@@ -6,5 +6,19 @@ class RoleController {
   getAllRoles = catchAsync(async (req, res) => {
     OK(res, 'User fetched successfully', await roleService.getAllRoles())
   })
+  getAllRolesFromUser = catchAsync(async (req, res) => {
+    OK(
+      res,
+      'User roles fetched successfully',
+      await roleService.getAllRolesFromUser(req.params.user_id)
+    )
+  })
+  createRoleUser = catchAsync(async (req, res) => {
+    CREATED(
+      res,
+      'Role user created successfully',
+      await roleService.createRoleUser(req.body)
+    )
+  })
 }
 export default new RoleController()

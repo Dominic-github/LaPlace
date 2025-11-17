@@ -3,7 +3,7 @@ import { CREATED, OK } from '@/core/success.js'
 import authService from '@/services/auth.js'
 
 class AuthController {
-  registerUser = catchAsync(async (req, res) => {
+  register = catchAsync(async (req, res) => {
     CREATED(
       res,
       'User registered successfully',

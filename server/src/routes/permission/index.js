@@ -1,10 +1,10 @@
 import express from 'express'
 const router = express.Router()
-import permission from '@/controlers/permission'
+import permissionController from '@/controlers/permission'
 import { authentication } from '@/middlewares/authentication.js'
 
-router.get('/', permission.getAllPermissions)
-router.get('/:role_id', permission.getAllPermissionsByRole)
+router.get('/', permissionController.getAllPermissions)
+router.get('/:role_id', permissionController.getAllPermissionsByRole)
 
 router.use(authentication)
 

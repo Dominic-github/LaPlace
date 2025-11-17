@@ -4,13 +4,13 @@ const { users } = models
 import { findUserById, findUserByEmail } from '@/models/repository/user'
 
 class UserService {
-  createUser = async ({ email, fullname, password }) => {
+  createUser = async (data) => {
     const findUser = await findUserByEmail(email)
     if (findUser) {
       throw new Error('User already exists')
     }
 
-    return users.create({ email, fullname, password })
+    return users.create(data)
   }
   getUserById = async (user_id) => {
     const findUser = users.findOne(
@@ -37,6 +37,9 @@ class UserService {
     const updatedUser = users.update({ status: '' }, { where: { user_id } })
 
     return updatedUser
+  }
+  getAllUsers = async () => {
+    return users.findAll({ attributes: { exclude: ['password'] } })
   }
 }
 

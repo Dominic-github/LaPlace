@@ -1,9 +1,13 @@
-import modles from '@/models'
+import models from '@/models'
 import { Api403Error } from '@/core/error'
 
 const { accommodations, favorites } = models
 
 class AccommodationService {
+  getAllAccommodations = async () => {
+    return accommodations.findAll()
+  }
+
   getAccommodationById = async (accommodation_id) => {
     const findAccommodation = await accommodations.findOne({
       where: { accommodation_id }

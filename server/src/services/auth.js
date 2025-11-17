@@ -94,6 +94,13 @@ class AuthService {
       where: { user_id: user_id },
       attributes: { exclude: ['password'] }
     })
+
+    if (!findUser) {
+      throw new Api403Error('User not found')
+    }
+
+    refre
+    
     const delKey = await TokenService.deleteTokenById(user_id)
     if (delKey === 1) {
       return findUser
