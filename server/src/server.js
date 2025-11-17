@@ -4,11 +4,13 @@ import morgan from 'morgan'
 import helmet from 'helmet'
 import compression from 'compression'
 import cookieParser from 'cookie-parser'
+import { Server } from 'socket.io'
 import 'dotenv/config'
 
 import connectDB from './database/connect.js'
-
 import routes from './routes/index.js'
+import initSocket from './socket/index.js'
+import { errorMiddleware } from './middlewares/errorHandling.js'
 
 const PORT = parseInt(process.env.APP_PORT || process.env.PORT || '8000')
 const app = express()
@@ -39,8 +41,12 @@ app.use(
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      scriptSrc: ["'self'"],
-      styleSrc: ["'self'"]
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      connectSrc: ["'self'", process.env.CLIENT_URL],
+      imgSrc: ["'self'", 'data:'],
+      objectSrc: ["'none'"]
     }
   })
 )
@@ -78,9 +84,18 @@ connectDB()
 app.get('/', (req, res) => {
   res.send(`Hello World! LaPlace API is running... ${process.env.APP_URL}`)
 })
-
 app.use('', routes)
 
-app.listen(PORT, '0.0.0.0', () => {
+app.use(errorMiddleware)
+
+const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on port ${PORT}, http://localhost:${PORT} `)
 })
+
+const io = new Server(server, {
+  cors: {
+    origin: process.env.CLIENT_URL,
+    credentials: true
+  }
+})
+initSocket(io)

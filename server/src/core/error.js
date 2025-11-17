@@ -4,10 +4,10 @@ import 'dotenv/config'
 export class BaseError extends Error {
   constructor(message, status, errors, isOperational) {
     super(message)
-    if (process.env.NODE_ENV === 'production') {
-      Object.setPrototypeOf(this, new.target.prototype)
-      Error.captureStackTrace(this, this.constructor)
-    }
+    // if (process.env.NODE_ENV === 'production') {
+    //   Object.setPrototypeOf(this, new.target.prototype)
+    //   Error.captureStackTrace(this, this.constructor)
+    // }
     this.status = status
     this.errors = errors
     this.isOperational = isOperational
@@ -81,6 +81,17 @@ export class Api404Error extends BaseError {
     message = ReasonPhrases.NOT_FOUND,
     errors = [],
     status = StatusCodes.NOT_FOUND,
+    isOperational = true
+  ) {
+    super(message, status, errors, isOperational)
+  }
+}
+
+export class Api422Error extends BaseError {
+  constructor(
+    message = ReasonPhrases.UNPROCESSABLE_ENTITY,
+    errors = [],
+    status = StatusCodes.UNPROCESSABLE_ENTITY,
     isOperational = true
   ) {
     super(message, status, errors, isOperational)

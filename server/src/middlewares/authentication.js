@@ -1,9 +1,10 @@
 import catchAsync from '@/helpers/catchAsync.js'
 import { Api403Error, Api404Error, Api401Error } from '../core/error.js'
 import TokenService from '@/services/token.js'
-import { URL_WHITELIST } from '@/config/index.js'
+import { URL_WHITELIST, permissions } from '@/config/index.js'
 import { verifyJwt, extractToken, parseJwt } from '../helpers/jwt.js'
-
+import { getUserRole } from '@/models/repository/role.js'
+import PermissionService from '@/services/permission.js'
 const HEADER = {
   API_KEY: 'x-api-key',
   CLIENT_ID: 'x-client-id',
@@ -28,20 +29,16 @@ export const authentication = catchAsync(async (req, res, next) => {
     (req.headers[HEADER.AUTHORIZATION] ?? '').toString()
   )
 
-  // 1. check user id
   const obj = parseJwt(accessToken || refreshToken)
 
   if (!obj.user_id) throw new Api403Error('Invalid request')
 
-  // 2. check user id
   const user_id = clientId || obj.user_id
   if (!user_id) throw new Api403Error('Invalid request')
 
-  // 2. check keyStore by user_id
   const keyStore = await TokenService.findTokenByUserId(user_id)
   if (!keyStore) throw new Api404Error('Resource not found')
 
-  // 3. get refreshToken
   if (refreshToken && keyStore.private_key) {
     try {
       const decodeUser = verifyJwt(refreshToken, keyStore.private_key)
@@ -57,10 +54,8 @@ export const authentication = catchAsync(async (req, res, next) => {
     }
   }
 
-  // 3. get auth token
   if (!accessToken) throw new Api403Error('Invalid request')
 
-  // 4.
   try {
     if (keyStore.public_key) {
       const decodeUser = verifyJwt(accessToken, keyStore.public_key)
@@ -75,3 +70,29 @@ export const authentication = catchAsync(async (req, res, next) => {
     throw new Api401Error('Unauthorized')
   }
 })
+
+export const checkPermission = (action) =>
+  catchAsync(async (req, res, next) => {
+    const user = req.user
+
+    if (!user) {
+      throw new Api403Error('Missing user information')
+    }
+
+    const role = await getUserRole(user.user_id)
+
+    const rolePerms = await PermissionService.getAllPermissionsByRole(
+      role.role_id
+    )
+
+    const isAllowed =
+      role.name === 'admin' && action === '*'
+        ? true
+        : rolePerms.includes('*') || rolePerms.includes(action)
+
+    if (!isAllowed) {
+      throw new Api403Error('Permission denied')
+    }
+
+    return next()
+  })

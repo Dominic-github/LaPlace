@@ -1,4 +1,4 @@
-import { StatusCodes } from '~/constants/http'
+import { StatusCodes } from 'http-status-codes'
 import { Response } from 'express'
 
 class SuccessResponse {

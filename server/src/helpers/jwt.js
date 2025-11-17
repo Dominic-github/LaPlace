@@ -41,14 +41,12 @@ export const createTokenPair = async (payload, publicKey, privateKey) => {
  * @param {*} keySecret
  */
 export const verifyJwt = (token, keySecret) => {
-  return JWT.verify(token, keySecret, (error, decode) => {
-    if (error) {
-      console.error(`error verify:: `, error)
-      return
-    } else {
-      return decode
-    }
-  })
+  try {
+    return JWT.verify(token, keySecret)
+  } catch (err) {
+    console.error('Verify error:', err)
+    return null
+  }
 }
 
 export const extractToken = (tokenHeader) => {
