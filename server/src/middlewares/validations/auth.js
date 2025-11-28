@@ -15,6 +15,10 @@ const loginSchema = joi.object({
   type: joi.string().valid('user', 'landlord', 'admin', 'broker')
 })
 
+const forgetPasswordSchema = joi.object({
+  email: joi.string().email().required(),
+})
+
 const validateRegister = catchAsync(async (req, res, next) => {
   const { error, value } = registerSchema.validate(req.body)
   if (error) {
@@ -31,7 +35,19 @@ const validateLogin = catchAsync(async (req, res, next) => {
   next()
 })
 
+const validateForgetPassword = catchAsync(async (req, res, next) => {
+
+  const { error, value } = forgetPasswordSchema.validate(req.body)
+  if (error) {
+    throw new Api422Error('Validation Error', error.details)
+  }
+  next()
+
+})
+
 export default {
   validateRegister,
-  validateLogin
+  validateLogin,
+  validateForgetPassword 
+
 }

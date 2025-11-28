@@ -34,5 +34,14 @@ class AuthController {
       await authService.logout(req.user.user_id)
     )
   })
+
+  forgetPassword = catchAsync(async (req, res) => {
+    OK(
+      res,
+      'Reset password successfully',
+      await authService.forgetPassword(req.body)
+    )
+
+  })
 }
 export default new AuthController()

@@ -2,6 +2,7 @@ import models from '@/models'
 import { Api403Error } from '@/core/error'
 import bcrypt from 'bcrypt'
 import TokenService from '@/services/token'
+import EmailService from '@/services/email'
 import { createTokenPair } from '@/helpers/jwt'
 import { findUserByEmail } from '@/models/repository/user'
 import { createRoleUser } from '@/models/repository/role'
@@ -100,7 +101,7 @@ class AuthService {
     }
 
     refre
-    
+
     const delKey = await TokenService.deleteTokenById(user_id)
     if (delKey === 1) {
       return findUser
@@ -163,6 +164,35 @@ class AuthService {
     return {
       user: findUser,
       tokens: newToken
+    }
+  }
+
+  forgetPassword = async ({ email }) => {
+    if (!email) {
+      throw new Api403Error('Email is required')
+    }
+
+    const user = await users.findOne({
+      where: { email }
+    })
+
+    if (!user) {
+      throw new Api403Error('User with this email not found')
+    }
+    
+
+    const email = await new EmailService({
+      from: from,
+      to: email,
+      name: email,
+      type: ''
+    }).sendForgetPasswordMail({
+      to: email,
+      name: user.fullname || user.email,
+    })
+
+    return {
+      message: 'Reset password instructions have been sent to your email.'
     }
   }
 }

@@ -7,6 +7,7 @@ import { authentication } from '@/middlewares/authentication.js'
 // User
 router.post('/register', authValidate.validateRegister, authController.register)
 router.post('/login', authValidate.validateLogin, authController.login)
+router.post('/forget-password', authValidate.validateForgetPassword, authController.forgetPassword)
 
 router.use(authentication)
 router.post('/refresh-token', authController.refreshToken)

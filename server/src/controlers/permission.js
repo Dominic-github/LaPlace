@@ -6,7 +6,7 @@ class PermissionController {
   getAllPermissionsByRole = catchAsync(async (req, res) => {
     OK(
       res,
-      'User fetched successfully',
+      'Get All permission From role sucessfully',
       await permissionService.getAllPermissionsByRole(req.params.role_id)
     )
   })
