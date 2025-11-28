@@ -9,7 +9,6 @@ import {
 // router.get('/:role_id/permissions', role.getAllPermissionsByRole)
 
 router.use(authentication)
-
 router.get('/', checkPermission('*'), roleController.getAllRoles)
 
 export default router

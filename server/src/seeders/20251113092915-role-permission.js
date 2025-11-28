@@ -1,5 +1,4 @@
 'use strict'
-const { default: role } = require('@/services/role')
 const { v4: uuidv4 } = require('uuid')
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -32,36 +31,48 @@ module.exports = {
       'booking_edit',
       'booking_delete',
 
+      'review_view',
+      'review_add',
+      'review_edit',
+      'review_delete',
+
       'accommodation_view',
 
       'payment_view',
 
+      'setting'
+
     ]
     const userPerms = [
-      'accommodation_view',
+
+      'report_view',
+      'report_add',
+      'report_edit',
+      'report_delete',
 
       'booking_view',
       'booking_add',
       'booking_edit',
       'booking_delete',
 
-      'review_view',
-      'review_add',
-      'review_edit',
-      'review_delete',
+      'accommodation_view',
 
-      'view_own_contracts',
-      'manage_profile'
+      'payment_view',
+
+      'user_view',
+
+      'contract_view',
     ]
 
     // landlord permissions
     const landlordPerms = [
       'accommodation_view',
       'accommodation_add',
-      'accommodation_edit',
+      'accommodation_update',
       'accommodation_delete',
 
       'booking_view',
+      'booking_add',
       'booking_edit',
       'booking_delete',
 
@@ -71,6 +82,7 @@ module.exports = {
       'payment_delete',
 
       'review_view',
+
       'user_view',
 
       'contract_view',
@@ -116,6 +128,12 @@ module.exports = {
       report_view: uuidv4(),
       report_add: uuidv4(),
       report_edit: uuidv4(),
+      report_delete: uuidv4(),
+
+
+      review_view: uuidv4(),
+      review_add: uuidv4(),
+      review_edit: uuidv4(),
       review_delete: uuidv4(),
 
       booking_view: uuidv4(),
@@ -144,6 +162,11 @@ module.exports = {
       broker_add: uuidv4(),
       broker_edit: uuidv4(),
       broker_delete: uuidv4(),
+
+      contract_view: uuidv4(),
+      contract_add: uuidv4(),
+      contract_edit: uuidv4(),
+      contract_delete: uuidv4(),
     }
 
     // --- Insert roles ---
