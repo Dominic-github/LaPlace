@@ -8,8 +8,9 @@ import {
 
 router.get('/', accommodationControler.getAllAccommodations)
 router.get('/:accommodation_id', accommodationControler.getAccommodationById)
+
+
 router.use(authentication)
-// router.post('/create', accommodation.createAccommodation)
 
 router.post('/favorite', accommodationControler.addAccommodationToFavorite)
 router.post(
@@ -27,5 +28,6 @@ router.delete(
   checkPermission(''),
   accommodationControler.deleteAccommodation
 )
+
 
 export default router
