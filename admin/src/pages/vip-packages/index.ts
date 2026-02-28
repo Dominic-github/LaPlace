@@ -1,0 +1,1 @@
+export { VipPackageList } from "./list";

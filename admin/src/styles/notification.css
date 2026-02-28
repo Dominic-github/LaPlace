@@ -1,0 +1,295 @@
+/* ============================================
+   ANT DESIGN MESSAGE/NOTIFICATION STYLES
+   Modern notification design
+   ============================================ */
+
+/* Ensure main content has relative positioning */
+.mantine-AppShell-main {
+  position: relative !important;
+}
+
+/* Message Container - FORCE position at top right */
+.ant-message {
+  position: fixed !important;
+  top: 80px !important;
+  right: 24px !important;
+  left: auto !important;
+  transform: none !important;
+  z-index: 9999 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-end !important;
+  width: auto !important;
+  max-width: 500px !important;
+  pointer-events: none !important;
+}
+
+.ant-message .ant-message-notice {
+  pointer-events: auto !important;
+}
+
+.ant-message-notice {
+  text-align: left !important;
+  margin-bottom: 12px !important;
+  margin-left: auto !important;
+}
+
+/* Message Notice Content */
+.ant-message .ant-message-notice .ant-message-notice-content {
+  display: inline-block !important;
+  padding: 16px 24px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2),
+              0 4px 8px rgba(0, 0, 0, 0.15) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  min-width: 320px !important;
+  max-width: 480px !important;
+  animation: slideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Success Message */
+.ant-message-success .ant-message-notice-content {
+  background: linear-gradient(135deg, #52c41a 0%, #73d13d 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+html[data-mantine-color-scheme="dark"] .ant-message-success .ant-message-notice-content,
+[data-mantine-color-scheme="dark"] .ant-message-success .ant-message-notice-content {
+  background: linear-gradient(135deg, #2f7c14 0%, #3d9e1f 100%) !important;
+  border: 1px solid rgba(82, 196, 26, 0.4) !important;
+  box-shadow: 0 8px 24px rgba(82, 196, 26, 0.3), 0 4px 8px rgba(82, 196, 26, 0.2) !important;
+}
+
+.ant-message-success .ant-message-notice-content,
+.ant-message-success .ant-message-notice-content *,
+.ant-message-success .anticon {
+  color: #ffffff !important;
+}
+
+/* Error Message */
+.ant-message-error .ant-message-notice-content {
+  background: linear-gradient(135deg, #ff4d4f 0%, #ff7875 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+html[data-mantine-color-scheme="dark"] .ant-message-error .ant-message-notice-content,
+[data-mantine-color-scheme="dark"] .ant-message-error .ant-message-notice-content {
+  background: linear-gradient(135deg, #a61d24 0%, #cf1322 100%) !important;
+  border: 1px solid rgba(255, 77, 79, 0.4) !important;
+  box-shadow: 0 8px 24px rgba(255, 77, 79, 0.3), 0 4px 8px rgba(255, 77, 79, 0.2) !important;
+}
+
+.ant-message-error .ant-message-notice-content,
+.ant-message-error .ant-message-notice-content *,
+.ant-message-error .anticon {
+  color: #ffffff !important;
+}
+
+/* Warning Message */
+.ant-message-warning .ant-message-notice-content {
+  background: linear-gradient(135deg, #faad14 0%, #ffc53d 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+html[data-mantine-color-scheme="dark"] .ant-message-warning .ant-message-notice-content,
+[data-mantine-color-scheme="dark"] .ant-message-warning .ant-message-notice-content {
+  background: linear-gradient(135deg, #ad6800 0%, #d48806 100%) !important;
+  border: 1px solid rgba(250, 173, 20, 0.4) !important;
+  box-shadow: 0 8px 24px rgba(250, 173, 20, 0.3), 0 4px 8px rgba(250, 173, 20, 0.2) !important;
+}
+
+.ant-message-warning .ant-message-notice-content,
+.ant-message-warning .ant-message-notice-content *,
+.ant-message-warning .anticon {
+  color: #ffffff !important;
+}
+
+/* Info Message */
+.ant-message-info .ant-message-notice-content {
+  background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+html[data-mantine-color-scheme="dark"] .ant-message-info .ant-message-notice-content,
+[data-mantine-color-scheme="dark"] .ant-message-info .ant-message-notice-content {
+  background: linear-gradient(135deg, #0958d9 0%, #1677ff 100%) !important;
+  border: 1px solid rgba(24, 144, 255, 0.4) !important;
+  box-shadow: 0 8px 24px rgba(24, 144, 255, 0.3), 0 4px 8px rgba(24, 144, 255, 0.2) !important;
+}
+
+.ant-message-info .ant-message-notice-content,
+.ant-message-info .ant-message-notice-content *,
+.ant-message-info .anticon {
+  color: #ffffff !important;
+}
+
+/* Loading Message */
+.ant-message-loading .ant-message-notice-content {
+  background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+html[data-mantine-color-scheme="dark"] .ant-message-loading .ant-message-notice-content,
+[data-mantine-color-scheme="dark"] .ant-message-loading .ant-message-notice-content {
+  background: linear-gradient(135deg, #0958d9 0%, #1677ff 100%) !important;
+  border: 1px solid rgba(24, 144, 255, 0.4) !important;
+  box-shadow: 0 8px 24px rgba(24, 144, 255, 0.3), 0 4px 8px rgba(24, 144, 255, 0.2) !important;
+}
+
+.ant-message-loading .ant-message-notice-content,
+.ant-message-loading .ant-message-notice-content *,
+.ant-message-loading .anticon {
+  color: #ffffff !important;
+}
+
+/* Message Text - Force white color */
+.ant-message .ant-message-notice-content span,
+.ant-message .ant-message-notice-content span * {
+  color: #ffffff !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+}
+
+/* Custom content (with list) */
+.ant-message .ant-message-notice-content div,
+.ant-message .ant-message-notice-content div * {
+  color: #ffffff !important;
+}
+
+.ant-message .ant-message-notice-content ul {
+  margin: 8px 0 0 0 !important;
+  padding-left: 20px !important;
+}
+
+.ant-message .ant-message-notice-content ul,
+.ant-message .ant-message-notice-content ul * {
+  color: #ffffff !important;
+}
+
+.ant-message .ant-message-notice-content li {
+  margin: 4px 0 !important;
+  font-size: 13px !important;
+}
+
+/* Dark Mode General Adjustments */
+[data-mantine-color-scheme="dark"] .ant-message .ant-message-notice-content {
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+}
+
+/* Ensure visibility and white text */
+.ant-message .ant-message-notice-content,
+.ant-message .ant-message-notice-content *,
+.ant-message .ant-message-notice-content span,
+.ant-message .ant-message-notice-content div,
+.ant-message .ant-message-notice-content p,
+.ant-message .ant-message-notice-content li,
+.ant-message .ant-message-notice-content ul {
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: #ffffff !important;
+}
+
+/* Override any color styles */
+.ant-message .ant-message-notice-content [style*="color"] {
+  color: #ffffff !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ant-message {
+    right: 16px !important;
+    top: 70px !important;
+  }
+
+  .ant-message .ant-message-notice-content {
+    min-width: 280px !important;
+    max-width: calc(100vw - 48px) !important;
+    padding: 14px 20px !important;
+  }
+}
+
+/* Debug - Remove if working */
+.ant-message .ant-message-notice {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+
+/* Force override any inline styles */
+.ant-message-error .ant-message-notice-content[style],
+.ant-message-error .ant-message-notice-content {
+  background: linear-gradient(135deg, #ff4d4f 0%, #ff7875 100%) !important;
+}
+
+.ant-message-success .ant-message-notice-content[style],
+.ant-message-success .ant-message-notice-content {
+  background: linear-gradient(135deg, #52c41a 0%, #73d13d 100%) !important;
+}
+
+.ant-message-warning .ant-message-notice-content[style],
+.ant-message-warning .ant-message-notice-content {
+  background: linear-gradient(135deg, #faad14 0%, #ffc53d 100%) !important;
+}
+
+.ant-message-info .ant-message-notice-content[style],
+.ant-message-info .ant-message-notice-content {
+  background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%) !important;
+}
+
+.ant-message-loading .ant-message-notice-content[style],
+.ant-message-loading .ant-message-notice-content {
+  background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%) !important;
+}
+
+/* Dark Mode - Force override */
+html[data-mantine-color-scheme="dark"] .ant-message-error .ant-message-notice-content[style],
+html[data-mantine-color-scheme="dark"] .ant-message-error .ant-message-notice-content,
+[data-mantine-color-scheme="dark"] .ant-message-error .ant-message-notice-content[style],
+[data-mantine-color-scheme="dark"] .ant-message-error .ant-message-notice-content {
+  background: linear-gradient(135deg, #a61d24 0%, #cf1322 100%) !important;
+}
+
+html[data-mantine-color-scheme="dark"] .ant-message-success .ant-message-notice-content[style],
+html[data-mantine-color-scheme="dark"] .ant-message-success .ant-message-notice-content,
+[data-mantine-color-scheme="dark"] .ant-message-success .ant-message-notice-content[style],
+[data-mantine-color-scheme="dark"] .ant-message-success .ant-message-notice-content {
+  background: linear-gradient(135deg, #2f7c14 0%, #3d9e1f 100%) !important;
+}
+
+html[data-mantine-color-scheme="dark"] .ant-message-warning .ant-message-notice-content[style],
+html[data-mantine-color-scheme="dark"] .ant-message-warning .ant-message-notice-content,
+[data-mantine-color-scheme="dark"] .ant-message-warning .ant-message-notice-content[style],
+[data-mantine-color-scheme="dark"] .ant-message-warning .ant-message-notice-content {
+  background: linear-gradient(135deg, #ad6800 0%, #d48806 100%) !important;
+}
+
+html[data-mantine-color-scheme="dark"] .ant-message-info .ant-message-notice-content[style],
+html[data-mantine-color-scheme="dark"] .ant-message-info .ant-message-notice-content,
+[data-mantine-color-scheme="dark"] .ant-message-info .ant-message-notice-content[style],
+[data-mantine-color-scheme="dark"] .ant-message-info .ant-message-notice-content {
+  background: linear-gradient(135deg, #0958d9 0%, #1677ff 100%) !important;
+}
+
+html[data-mantine-color-scheme="dark"] .ant-message-loading .ant-message-notice-content[style],
+html[data-mantine-color-scheme="dark"] .ant-message-loading .ant-message-notice-content,
+[data-mantine-color-scheme="dark"] .ant-message-loading .ant-message-notice-content[style],
+[data-mantine-color-scheme="dark"] .ant-message-loading .ant-message-notice-content {
+  background: linear-gradient(135deg, #0958d9 0%, #1677ff 100%) !important;
+}
+

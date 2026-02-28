@@ -1,0 +1,231 @@
+.post-editor-layout {
+  padding: 0;
+}
+
+.post-editor-main {
+  background: #fff;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.post-editor-sidebar {
+  /* Không sticky, không scroll */
+}
+
+/* Meta Box - WordPress style */
+.meta-box {
+  background: #fff;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.meta-box-header {
+  padding: 12px 16px;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+  font-weight: 600;
+  font-size: 14px;
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.meta-box-header .anticon {
+  font-size: 16px;
+  color: #6b7280;
+}
+
+.meta-box-body {
+  padding: 16px;
+}
+
+.meta-box-footer {
+  padding: 12px 16px;
+  background: #f9fafb;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Publish Box specific styles */
+.publish-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  background: #f3f4f6;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.publish-status .anticon {
+  font-size: 14px;
+}
+
+.publish-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Categories Box */
+.categories-tree {
+  /* Không giới hạn height, show full */
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+/* Tags Box */
+.tags-input {
+  margin-bottom: 8px;
+}
+
+.tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Featured Image Box */
+.featured-image-preview {
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.featured-image-preview img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.featured-image-placeholder {
+  width: 100%;
+  height: 150px;
+  background: #f3f4f6;
+  border: 2px dashed #d1d5db;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.featured-image-placeholder:hover {
+  border-color: #1890ff;
+  color: #1890ff;
+  background: #f0f9ff;
+}
+
+.featured-image-placeholder .anticon {
+  font-size: 32px;
+}
+
+/* SEO Box */
+.seo-preview {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.seo-preview-title {
+  color: #1a0dab;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+
+.seo-preview-title:hover {
+  text-decoration: underline;
+}
+
+.seo-preview-url {
+  color: #006621;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.seo-preview-description {
+  color: #545454;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* Dark mode support */
+[data-mantine-color-scheme="dark"] .post-editor-main,
+[data-mantine-color-scheme="dark"] .meta-box {
+  background: #25262b !important;
+  border: 1px solid #4a4d55 !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+[data-mantine-color-scheme="dark"] .meta-box-header,
+[data-mantine-color-scheme="dark"] .meta-box-footer {
+  background: #2C2E33 !important;
+  border-color: #4a4d55 !important;
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .meta-box-body {
+  background: #25262b !important;
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .publish-status {
+  background: #2C2E33 !important;
+  border: 1px solid #4a4d55 !important;
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .categories-tree {
+  border-color: #4a4d55 !important;
+  background: #25262b !important;
+}
+
+[data-mantine-color-scheme="dark"] .featured-image-placeholder {
+  background: #2C2E33 !important;
+  border-color: #4a4d55 !important;
+  color: #909296 !important;
+}
+
+[data-mantine-color-scheme="dark"] .featured-image-placeholder:hover {
+  border-color: #1c7ed6 !important;
+  color: #1c7ed6 !important;
+  background: #25262b !important;
+}
+
+[data-mantine-color-scheme="dark"] .featured-image-preview {
+  border-color: #4a4d55 !important;
+}
+
+[data-mantine-color-scheme="dark"] .seo-preview {
+  background: #2C2E33 !important;
+  border: 1px solid #4a4d55 !important;
+}
+
+[data-mantine-color-scheme="dark"] .seo-preview-title {
+  color: #5c9ce6 !important;
+}
+
+[data-mantine-color-scheme="dark"] .seo-preview-url {
+  color: #51cf66 !important;
+}
+
+[data-mantine-color-scheme="dark"] .seo-preview-description {
+  color: #C1C2C5 !important;
+}
+

@@ -1,0 +1,682 @@
+/* Dark Mode Improvements */
+
+/* Global dark mode styles */
+[data-mantine-color-scheme="dark"] {
+  /* Background colors */
+  --mantine-color-body: #1A1B1E;
+  --mantine-color-default: #25262b;
+  --mantine-color-default-hover: #2C2E33;
+  --mantine-color-default-border: #373A40;
+  
+  /* Text colors */
+  --mantine-color-text: #C1C2C5;
+  --mantine-color-dimmed: #909296;
+  
+  /* Paper/Card backgrounds */
+  --mantine-color-white: #25262b;
+}
+
+/* Ant Design components in dark mode */
+[data-mantine-color-scheme="dark"] .ant-table {
+  background: #25262b !important;
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-table-thead > tr > th {
+  background: #2C2E33 !important;
+  color: #E0E0E0 !important;
+  border-bottom: 1px solid #373A40 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-table-tbody > tr > td {
+  background: #25262b !important;
+  color: #E0E0E0 !important;
+  border-bottom: 1px solid #373A40 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-table-tbody > tr:hover > td {
+  background: #2C2E33 !important;
+}
+
+/* Breadcrumb */
+[data-mantine-color-scheme="dark"] .ant-breadcrumb,
+[data-mantine-color-scheme="dark"] .ant-breadcrumb-link,
+[data-mantine-color-scheme="dark"] .ant-breadcrumb-link a,
+[data-mantine-color-scheme="dark"] .ant-breadcrumb-separator {
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-breadcrumb-link:hover,
+[data-mantine-color-scheme="dark"] .ant-breadcrumb-link a:hover {
+  color: #1c7ed6 !important;
+}
+
+/* Labels and text in forms */
+[data-mantine-color-scheme="dark"] .ant-form-item-label > label,
+[data-mantine-color-scheme="dark"] .ant-form-item-label,
+[data-mantine-color-scheme="dark"] label {
+  color: #E0E0E0 !important;
+}
+
+/* Descriptions and help text */
+[data-mantine-color-scheme="dark"] .ant-form-item-explain,
+[data-mantine-color-scheme="dark"] .ant-form-item-extra {
+  color: #909296 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-pagination {
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-pagination-item {
+  background: #25262b !important;
+  border-color: #373A40 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-pagination-item a {
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-pagination-item-active {
+  background: #1c7ed6 !important;
+  border-color: #1c7ed6 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-pagination-item-active a {
+  color: white !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-select-selector {
+  background: #25262b !important;
+  border-color: #373A40 !important;
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-select-selection-item,
+[data-mantine-color-scheme="dark"] .ant-select-selection-placeholder {
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-input,
+[data-mantine-color-scheme="dark"] .ant-input-number,
+[data-mantine-color-scheme="dark"] .ant-input-number-input,
+[data-mantine-color-scheme="dark"] textarea.ant-input,
+[data-mantine-color-scheme="dark"] .ant-input-affix-wrapper,
+[data-mantine-color-scheme="dark"] .ant-picker {
+  background: #25262b !important;
+  border-color: #4a4d55 !important;
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-input:hover,
+[data-mantine-color-scheme="dark"] .ant-input-number:hover,
+[data-mantine-color-scheme="dark"] textarea.ant-input:hover,
+[data-mantine-color-scheme="dark"] .ant-input-affix-wrapper:hover,
+[data-mantine-color-scheme="dark"] .ant-picker:hover {
+  border-color: #5c6070 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-input:focus,
+[data-mantine-color-scheme="dark"] .ant-input-number:focus,
+[data-mantine-color-scheme="dark"] textarea.ant-input:focus,
+[data-mantine-color-scheme="dark"] .ant-input-affix-wrapper:focus,
+[data-mantine-color-scheme="dark"] .ant-input-affix-wrapper-focused,
+[data-mantine-color-scheme="dark"] .ant-picker:focus,
+[data-mantine-color-scheme="dark"] .ant-picker-focused {
+  border-color: #1c7ed6 !important;
+  box-shadow: 0 0 0 2px rgba(28, 126, 214, 0.2) !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-input::placeholder,
+[data-mantine-color-scheme="dark"] textarea.ant-input::placeholder {
+  color: #909296 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-input-affix-wrapper input {
+  background: transparent !important;
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-input-disabled,
+[data-mantine-color-scheme="dark"] .ant-input[disabled],
+[data-mantine-color-scheme="dark"] .ant-input-affix-wrapper-disabled {
+  background: #1A1B1E !important;
+  border-color: #373A40 !important;
+  color: #909296 !important;
+  cursor: not-allowed;
+}
+
+/* Input Group Addon */
+[data-mantine-color-scheme="dark"] .ant-input-group-addon {
+  background: #2C2E33 !important;
+  border-color: #4a4d55 !important;
+  color: #E0E0E0 !important;
+}
+
+/* Form help text and validation */
+[data-mantine-color-scheme="dark"] .ant-form-item-explain,
+[data-mantine-color-scheme="dark"] .ant-form-item-extra {
+  color: #909296 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-form-item-explain-error {
+  color: #ff6b6b !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-form-item-explain-success {
+  color: #51cf66 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-form-item-explain-warning {
+  color: #ffd43b !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-btn {
+  background: #25262b !important;
+  border-color: #373A40 !important;
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-btn:hover {
+  background: #2C2E33 !important;
+  border-color: #1c7ed6 !important;
+  color: #1c7ed6 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-btn-primary {
+  background: #1c7ed6 !important;
+  border-color: #1c7ed6 !important;
+  color: white !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-btn-primary:hover {
+  background: #1971c2 !important;
+  border-color: #1971c2 !important;
+  color: white !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-card {
+  background: #25262b !important;
+  border-color: #4a4d55 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-card-head {
+  background: #2C2E33 !important;
+  border-bottom: 1px solid #4a4d55 !important;
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-card-head-title {
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-card-body {
+  color: #E0E0E0 !important;
+}
+
+/* Select */
+[data-mantine-color-scheme="dark"] .ant-select {
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-select-selector {
+  background: #25262b !important;
+  border-color: #4a4d55 !important;
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-select:hover .ant-select-selector {
+  border-color: #5c6070 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-select-focused .ant-select-selector,
+[data-mantine-color-scheme="dark"] .ant-select-open .ant-select-selector {
+  border-color: #1c7ed6 !important;
+  box-shadow: 0 0 0 2px rgba(28, 126, 214, 0.2) !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-select-selection-placeholder {
+  color: #909296 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-select-selection-item {
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-select-arrow {
+  color: #909296 !important;
+}
+
+/* Dropdown menus */
+[data-mantine-color-scheme="dark"] .ant-dropdown,
+[data-mantine-color-scheme="dark"] .ant-select-dropdown {
+  background: #25262b !important;
+  border-color: #4a4d55 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-dropdown-menu,
+[data-mantine-color-scheme="dark"] .ant-select-dropdown-menu {
+  background: #25262b !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-dropdown-menu-item,
+[data-mantine-color-scheme="dark"] .ant-select-item {
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-dropdown-menu-item:hover,
+[data-mantine-color-scheme="dark"] .ant-select-item:hover,
+[data-mantine-color-scheme="dark"] .ant-select-item-option-active {
+  background: #2C2E33 !important;
+  color: #FFFFFF !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-select-item-option-selected {
+  background: #1c7ed6 !important;
+  color: #FFFFFF !important;
+}
+
+/* Checkbox and Radio */
+[data-mantine-color-scheme="dark"] .ant-checkbox-wrapper,
+[data-mantine-color-scheme="dark"] .ant-radio-wrapper {
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-checkbox-inner,
+[data-mantine-color-scheme="dark"] .ant-radio-inner {
+  background: #25262b !important;
+  border-color: #373A40 !important;
+}
+
+/* Switch */
+[data-mantine-color-scheme="dark"] .ant-switch {
+  background: #373A40 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-switch-checked {
+  background: #1c7ed6 !important;
+}
+
+/* Tabs */
+[data-mantine-color-scheme="dark"] .ant-tabs-tab {
+  color: #909296 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-tabs-tab-active {
+  color: #1c7ed6 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-tabs-tab:hover {
+  color: #E0E0E0 !important;
+}
+
+/* Modal */
+[data-mantine-color-scheme="dark"] .ant-modal-content {
+  background: #25262b !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-modal-header {
+  background: #2C2E33 !important;
+  border-bottom: 1px solid #373A40 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-modal-title {
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-modal-body {
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-modal-footer {
+  border-top: 1px solid #373A40 !important;
+}
+
+/* Mantine Paper components */
+[data-mantine-color-scheme="dark"] .mantine-Paper-root {
+  background-color: #25262b !important;
+  border-color: #373A40 !important;
+}
+
+/* Mantine Table */
+[data-mantine-color-scheme="dark"] .mantine-Table-root {
+  background-color: #25262b !important;
+}
+
+[data-mantine-color-scheme="dark"] .mantine-Table-root thead tr th {
+  background-color: #2C2E33 !important;
+  color: #C1C2C5 !important;
+  border-bottom: 1px solid #373A40 !important;
+}
+
+[data-mantine-color-scheme="dark"] .mantine-Table-root tbody tr td {
+  background-color: #25262b !important;
+  color: #C1C2C5 !important;
+  border-bottom: 1px solid #373A40 !important;
+}
+
+[data-mantine-color-scheme="dark"] .mantine-Table-root tbody tr:hover {
+  background-color: #2C2E33 !important;
+}
+
+/* Refine Layout */
+[data-mantine-color-scheme="dark"] .refine-layout-header {
+  background-color: #25262b !important;
+  border-bottom: 1px solid #373A40 !important;
+}
+
+[data-mantine-color-scheme="dark"] .refine-layout-sider {
+  background-color: #1A1B1E !important;
+  border-right: 1px solid #373A40 !important;
+}
+
+/* Mantine Layout Sidebar - Fix white background */
+[data-mantine-color-scheme="dark"] .mantine-AppShell-navbar,
+[data-mantine-color-scheme="dark"] aside[class*="mantine-AppShell"],
+[data-mantine-color-scheme="dark"] nav[class*="mantine"] {
+  background-color: #1A1B1E !important;
+  border-right: 1px solid #373A40 !important;
+}
+
+/* Sidebar menu items */
+[data-mantine-color-scheme="dark"] .mantine-NavLink-root,
+[data-mantine-color-scheme="dark"] a[class*="mantine-NavLink"],
+[data-mantine-color-scheme="dark"] button[class*="mantine-NavLink"] {
+  color: #E0E0E0 !important;
+  background-color: transparent !important;
+}
+
+[data-mantine-color-scheme="dark"] .mantine-NavLink-root:hover,
+[data-mantine-color-scheme="dark"] a[class*="mantine-NavLink"]:hover,
+[data-mantine-color-scheme="dark"] button[class*="mantine-NavLink"]:hover {
+  background-color: #2C2E33 !important;
+  color: #FFFFFF !important;
+}
+
+[data-mantine-color-scheme="dark"] .mantine-NavLink-root[data-active],
+[data-mantine-color-scheme="dark"] a[class*="mantine-NavLink"][data-active],
+[data-mantine-color-scheme="dark"] button[class*="mantine-NavLink"][data-active] {
+  background-color: #1c7ed6 !important;
+  color: #FFFFFF !important;
+}
+
+/* Sidebar labels and text */
+[data-mantine-color-scheme="dark"] .mantine-NavLink-label,
+[data-mantine-color-scheme="dark"] span[class*="mantine-NavLink-label"] {
+  color: #E0E0E0 !important;
+}
+
+/* Sidebar icons */
+[data-mantine-color-scheme="dark"] .mantine-NavLink-icon,
+[data-mantine-color-scheme="dark"] span[class*="mantine-NavLink-icon"] {
+  color: #E0E0E0 !important;
+}
+
+/* Header */
+[data-mantine-color-scheme="dark"] .mantine-AppShell-header,
+[data-mantine-color-scheme="dark"] header[class*="mantine-AppShell"] {
+  background-color: #25262b !important;
+  border-bottom: 1px solid #373A40 !important;
+}
+
+/* Main content area */
+[data-mantine-color-scheme="dark"] .mantine-AppShell-main,
+[data-mantine-color-scheme="dark"] main[class*="mantine-AppShell"] {
+  background-color: #1A1B1E !important;
+}
+
+/* Title in sidebar */
+[data-mantine-color-scheme="dark"] .mantine-Title-root {
+  color: #E0E0E0 !important;
+}
+
+/* Text elements - ensure good contrast */
+[data-mantine-color-scheme="dark"] .mantine-Text-root,
+[data-mantine-color-scheme="dark"] p,
+[data-mantine-color-scheme="dark"] span,
+[data-mantine-color-scheme="dark"] div {
+  color: #E0E0E0;
+}
+
+/* Headings - brighter for better visibility */
+[data-mantine-color-scheme="dark"] h1,
+[data-mantine-color-scheme="dark"] h2,
+[data-mantine-color-scheme="dark"] h3,
+[data-mantine-color-scheme="dark"] h4,
+[data-mantine-color-scheme="dark"] h5,
+[data-mantine-color-scheme="dark"] h6 {
+  color: #FFFFFF !important;
+}
+
+/* Tree component */
+[data-mantine-color-scheme="dark"] .ant-tree {
+  background: #25262b !important;
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-tree-node-content-wrapper {
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-tree-node-content-wrapper:hover {
+  background: #2C2E33 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-tree-node-selected .ant-tree-node-content-wrapper,
+[data-mantine-color-scheme="dark"] .ant-tree-treenode-selected .ant-tree-node-content-wrapper {
+  background: #1c7ed6 !important;
+  color: #FFFFFF !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-tree-node-selected .ant-tree-node-content-wrapper span,
+[data-mantine-color-scheme="dark"] .ant-tree-treenode-selected .ant-tree-node-content-wrapper span,
+[data-mantine-color-scheme="dark"] .ant-tree-node-selected span.ant-tree-title,
+[data-mantine-color-scheme="dark"] .ant-tree-treenode-selected span.ant-tree-title {
+  color: #FFFFFF !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-tree-checkbox-inner {
+  background: #25262b !important;
+  border-color: #4a4d55 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-tree-checkbox-checked .ant-tree-checkbox-inner {
+  background: #1c7ed6 !important;
+  border-color: #1c7ed6 !important;
+}
+
+/* Tag component */
+[data-mantine-color-scheme="dark"] .ant-tag {
+  background: #2C2E33 !important;
+  border-color: #4a4d55 !important;
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-tag-close-icon {
+  color: #909296 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-tag-close-icon:hover {
+  color: #E0E0E0 !important;
+}
+
+/* DatePicker */
+[data-mantine-color-scheme="dark"] .ant-picker-panel-container {
+  background: #25262b !important;
+  border-color: #4a4d55 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-picker-panel {
+  background: #25262b !important;
+  border-color: #4a4d55 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-picker-header {
+  color: #E0E0E0 !important;
+  border-bottom-color: #4a4d55 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-picker-content th,
+[data-mantine-color-scheme="dark"] .ant-picker-cell {
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-picker-cell:hover .ant-picker-cell-inner {
+  background: #2C2E33 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-picker-cell-selected .ant-picker-cell-inner {
+  background: #1c7ed6 !important;
+}
+
+/* Form labels */
+[data-mantine-color-scheme="dark"] .ant-form-item-label > label {
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-form-item-label > label.ant-form-item-required::before {
+  color: #ff6b6b !important;
+}
+
+/* Typography - ensure all text is visible */
+[data-mantine-color-scheme="dark"] .ant-typography {
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-typography-secondary {
+  color: #909296 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-typography-success {
+  color: #51cf66 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-typography-warning {
+  color: #ffd43b !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-typography-danger {
+  color: #ff6b6b !important;
+}
+
+/* Divider */
+[data-mantine-color-scheme="dark"] .ant-divider {
+  border-color: #4a4d55 !important;
+}
+
+/* Upload */
+[data-mantine-color-scheme="dark"] .ant-upload {
+  background: #25262b !important;
+  border-color: #4a4d55 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-upload:hover {
+  border-color: #1c7ed6 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-upload-list-item {
+  background: #25262b !important;
+  border-color: #4a4d55 !important;
+}
+
+/* Radio button text */
+[data-mantine-color-scheme="dark"] .ant-radio-wrapper span {
+  color: #E0E0E0 !important;
+}
+
+/* Empty state */
+[data-mantine-color-scheme="dark"] .ant-empty-description {
+  color: #909296 !important;
+}
+
+/* Descriptions */
+[data-mantine-color-scheme="dark"] .ant-descriptions-item-label {
+  color: #909296 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-descriptions-item-content {
+  color: #E0E0E0 !important;
+}
+
+/* Alert */
+[data-mantine-color-scheme="dark"] .ant-alert {
+  background: #2C2E33 !important;
+  border-color: #4a4d55 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-alert-message {
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-alert-description {
+  color: #C1C2C5 !important;
+}
+
+/* Ensure all text elements have proper contrast */
+[data-mantine-color-scheme="dark"] label,
+[data-mantine-color-scheme="dark"] .ant-form-text {
+  color: #E0E0E0 !important;
+}
+
+[data-mantine-color-scheme="dark"] small,
+[data-mantine-color-scheme="dark"] .text-muted {
+  color: #909296 !important;
+}
+
+/* Fix white backgrounds */
+[data-mantine-color-scheme="dark"] [style*="background: white"],
+[data-mantine-color-scheme="dark"] [style*="background-color: white"],
+[data-mantine-color-scheme="dark"] [style*="background:#fff"],
+[data-mantine-color-scheme="dark"] [style*="background-color:#fff"],
+[data-mantine-color-scheme="dark"] [style*="background: rgb(255, 255, 255)"],
+[data-mantine-color-scheme="dark"] [style*="background-color: rgb(255, 255, 255)"] {
+  background-color: #1A1B1E !important;
+}
+
+/* Fix black text on dark background */
+[data-mantine-color-scheme="dark"] [style*="color: black"],
+[data-mantine-color-scheme="dark"] [style*="color:#000"],
+[data-mantine-color-scheme="dark"] [style*="color: rgb(0, 0, 0)"] {
+  color: #E0E0E0 !important;
+}
+
+/* Active/Selected items with light background need dark text */
+[data-mantine-color-scheme="dark"] .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background: #1c7ed6 !important;
+  color: #FFFFFF !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-menu-item-selected {
+  background: #1c7ed6 !important;
+  color: #FFFFFF !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-menu-item-selected span,
+[data-mantine-color-scheme="dark"] .ant-menu-item-selected a {
+  color: #FFFFFF !important;
+}
+
+/* Checkbox checked state */
+[data-mantine-color-scheme="dark"] .ant-checkbox-checked .ant-checkbox-inner {
+  background: #1c7ed6 !important;
+  border-color: #1c7ed6 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-checkbox-wrapper:hover .ant-checkbox-inner,
+[data-mantine-color-scheme="dark"] .ant-checkbox:hover .ant-checkbox-inner {
+  border-color: #1c7ed6 !important;
+}
+
+/* Radio checked state */
+[data-mantine-color-scheme="dark"] .ant-radio-checked .ant-radio-inner {
+  border-color: #1c7ed6 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-radio-checked .ant-radio-inner::after {
+  background-color: #1c7ed6 !important;
+}
+
+[data-mantine-color-scheme="dark"] .ant-radio:hover .ant-radio-inner {
+  border-color: #1c7ed6 !important;
+}
+
