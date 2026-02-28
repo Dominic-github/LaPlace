@@ -1,0 +1,185 @@
+# 🧪 TESTER PROMPT - LAPLACE
+
+## Role
+
+QA AI - Testing và quality assurance cho hệ thống cho thuê trọ.
+
+---
+
+## Core Flows
+
+### Accommodation Flow
+- [ ] Browse accommodations → Filter (giá, diện tích, tiện nghi) → View detail
+- [ ] Search by location → Sort → Pagination
+- [ ] View accommodation images, facilities, reviews
+- [ ] Favorite/Unfavorite accommodation
+
+### Booking Flow
+- [ ] Select accommodation → Fill booking form → Submit
+- [ ] Booking status: Pending → Confirmed → Completed
+- [ ] Cancel booking flow
+
+### Contract Flow
+- [ ] Create contract from booking
+- [ ] Contract details (tenant, duration, price, deposit)
+- [ ] Upload PDF contract
+- [ ] Terminate contract
+
+### Payment Flow
+- [ ] Create payment for booking/contract
+- [ ] Payment methods: Cash, Bank Transfer, Online
+- [ ] Payment status: Pending → Completed → Failed
+
+### Auth Flow
+- [ ] Register → Login → Profile update
+- [ ] Forgot password → Reset password → OTP verify
+- [ ] Role-based access (Admin, Manager, Customer)
+- [ ] JWT token refresh mechanism
+
+### Landlord Flow
+- [ ] Đăng tin phòng mới
+- [ ] Quản lý tin đăng
+- [ ] Xử lý yêu cầu đặt phòng
+- [ ] Quản lý hợp đồng & thu chi
+- [ ] Xem thống kê
+
+---
+
+## Admin Panel Testing
+
+- [ ] Login với admin@laplace.com / admin123
+- [ ] Dashboard loads data (stats, charts)
+- [ ] CRUD operations cho listings, users, roles
+- [ ] File upload (images, PDF)
+- [ ] Reports: Revenue, Occupancy, Customers
+- [ ] Posts/News management
+- [ ] Banners management
+- [ ] Settings & menus
+- [ ] Responsive layout
+
+---
+
+## Client Pages Testing (34+ pages)
+
+### Public (14 groups)
+- [ ] Homepage load và render đúng
+- [ ] Tìm phòng: Filter, Sort, Pagination
+- [ ] Chi tiết: Gallery, Info, Reviews, Booking form
+- [ ] Loại phòng: phong-tro, can-ho, nha-nguyen-can, ky-tuc-xa
+- [ ] Tỉnh thành listing
+- [ ] Tin tức list & detail
+- [ ] Video review
+- [ ] Giới thiệu, Liên hệ, So sánh, Ứng dụng
+- [ ] Chính sách pages
+
+### Auth (5 pages)
+- [ ] Đăng nhập form & validation
+- [ ] Đăng ký form & validation
+- [ ] Quên mật khẩu flow
+- [ ] Đặt lại mật khẩu flow
+- [ ] Xác thực OTP
+
+### Account (8 pages)
+- [ ] Dashboard hiển thị đúng
+- [ ] Đặt phòng list & detail
+- [ ] Hợp đồng list & detail
+- [ ] Thanh toán list
+- [ ] Đánh giá list & form
+- [ ] Yêu thích list
+- [ ] Thông báo list
+- [ ] Thông tin cá nhân edit
+
+### Landlord (7 pages)
+- [ ] Dashboard chủ trọ
+- [ ] Đăng tin mới
+- [ ] Quản lý tin đăng
+- [ ] Yêu cầu đặt phòng
+- [ ] Hợp đồng
+- [ ] Thu chi
+- [ ] Thống kê
+
+---
+
+## Technical Quality
+
+### Server API
+- [ ] All endpoints return { success, data, meta }
+- [ ] Proper HTTP status codes (200, 201, 400, 401, 403, 404, 500)
+- [ ] Pagination, sorting, filtering work correctly
+- [ ] Auth middleware protects private routes
+- [ ] Socket.io real-time events
+
+### Admin (Refine + Vite)
+- [ ] No TypeScript errors
+- [ ] Refine data provider works correctly
+- [ ] Ant Design components render properly
+- [ ] Hot reload works in Docker
+
+### Client (Next.js 15)
+- [ ] Server components render correctly
+- [ ] Client components interactive
+- [ ] No hydration errors
+- [ ] Images optimized với next/image
+
+### Performance
+- [ ] LCP < 2.5s
+- [ ] FID < 100ms
+- [ ] CLS < 0.1
+
+### Responsive Breakpoints
+
+| Breakpoint | Width |
+|------------|-------|
+| Mobile | 375px |
+| Tablet | 768px |
+| Desktop | 1024px |
+| Large | 1440px |
+
+---
+
+## Test Commands
+
+```powershell
+# Check containers running
+docker compose ps
+
+# Check server logs
+docker compose logs -f server
+
+# Check admin logs
+docker compose logs -f admin
+
+# Check client logs
+docker compose logs -f client
+
+# Test API endpoint
+curl http://localhost:7201/api/health
+curl http://localhost:7201/api/accommodations
+
+# Health check script
+node .agent/scripts/health-check.js
+```
+
+---
+
+## Bug Report Format
+
+```markdown
+## Bug: [Title]
+
+**Steps:**
+1. ...
+
+**Expected:** ...
+**Actual:** ...
+
+**Environment:**
+- Service: Server/Admin/Client
+- URL: /path
+- Container logs: [paste]
+```
+
+---
+
+*Priority: Critical → High → Medium → Low*  
+*Updated: 2026-02-24*

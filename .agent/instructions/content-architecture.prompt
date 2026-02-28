@@ -1,0 +1,150 @@
+# 📝 CONTENT ARCHITECTURE - LAPLACE
+
+## Role
+
+Content AI - Cấu trúc nội dung cho nền tảng cho thuê trọ.
+
+---
+
+## Content Types
+
+### Accommodation Catalog
+
+| Entity | Endpoint |
+|--------|----------|
+| Accommodations | `/api/accommodations` |
+| Accommodation Images | (nested in accommodations) |
+| Facilities | `/api/facilities` |
+| Reviews | `/api/reviews` |
+
+### Booking & Contracts
+
+| Entity | Endpoint |
+|--------|----------|
+| Bookings | `/api/bookings` |
+| Contracts | `/api/contracts` |
+| Payments | `/api/payments` |
+
+### Users & Auth
+
+| Entity | Endpoint |
+|--------|----------|
+| Auth | `/api/auth` |
+| Users | `/api/users` |
+| Roles | `/api/roles` |
+| Permissions | `/api/permissions` |
+
+### Social
+
+| Entity | Endpoint |
+|--------|----------|
+| Favorites | `/api/favorites` |
+| Messages | `/api/messages` |
+
+### System
+
+| Entity | Endpoint |
+|--------|----------|
+| Reports | `/api/reports` |
+| Health | `/api/health` |
+
+---
+
+## Next.js Pages Mapping (Client) - Thực tế
+
+### Public Pages (14 groups)
+
+| URL | Page | Data |
+|-----|------|------|
+| `/` | Homepage | Featured, Stats, Flash Sale |
+| `/tim-phong` | Search | Accommodations + Filters |
+| `/phong-tro/[slug]` | Chi tiết phòng trọ | Accommodation, Reviews |
+| `/can-ho/[slug]` | Chi tiết căn hộ | Accommodation, Reviews |
+| `/nha-nguyen-can/[slug]` | Chi tiết nhà nguyên căn | Accommodation, Reviews |
+| `/ky-tuc-xa/[slug]` | Chi tiết ký túc xá | Accommodation, Reviews |
+| `/tinh-thanh/[slug]` | Theo tỉnh thành | Accommodations by location |
+| `/tin-tuc` | Tin tức | Posts |
+| `/tin-tuc/[slug]` | Chi tiết tin tức | Post |
+| `/video-review` | Video review | Videos |
+| `/gioi-thieu` | Giới thiệu | Static |
+| `/lien-he` | Liên hệ | Contact form |
+| `/so-sanh` | So sánh | Comparison |
+| `/ung-dung` | Tải ứng dụng | Static |
+| `/chinh-sach/*` | Chính sách | Static |
+
+### Auth Pages (5 pages)
+
+| URL | Page | Data |
+|-----|------|------|
+| `/dang-nhap` | Đăng nhập | Auth |
+| `/dang-ky` | Đăng ký | Auth |
+| `/quen-mat-khau` | Quên mật khẩu | Auth |
+| `/dat-lai-mat-khau` | Đặt lại mật khẩu | Auth |
+| `/xac-thuc` | Xác thực OTP | Auth |
+
+### Account Pages (8 pages)
+
+| URL | Page | Data |
+|-----|------|------|
+| `/tai-khoan` | Dashboard | User info, Stats |
+| `/tai-khoan/dat-phong` | Đặt phòng | Bookings |
+| `/tai-khoan/hop-dong` | Hợp đồng | Contracts |
+| `/tai-khoan/thanh-toan` | Thanh toán | Payments |
+| `/tai-khoan/danh-gia` | Đánh giá | Reviews |
+| `/tai-khoan/yeu-thich` | Yêu thích | Favorites |
+| `/tai-khoan/thong-bao` | Thông báo | Notifications |
+| `/tai-khoan/thong-tin` | Thông tin cá nhân | User profile |
+
+### Landlord Pages (7 pages)
+
+| URL | Page | Data |
+|-----|------|------|
+| `/chu-tro` | Dashboard chủ trọ | Stats, Revenue |
+| `/chu-tro/dang-tin` | Đăng tin | Create accommodation |
+| `/chu-tro/tin-dang` | Tin đã đăng | My accommodations |
+| `/chu-tro/yeu-cau-dat-phong` | Yêu cầu đặt phòng | Booking requests |
+| `/chu-tro/hop-dong` | Hợp đồng | Contracts |
+| `/chu-tro/thu-chi` | Thu chi | Finance |
+| `/chu-tro/thong-ke` | Thống kê | Statistics |
+
+---
+
+## SEO Integration
+
+### Metadata
+
+```tsx
+// app/phong-tro/[slug]/page.tsx
+export async function generateMetadata({ params }): Promise<Metadata> {
+  const accommodation = await getAccommodation(params.slug);
+  return {
+    title: accommodation.title + ' - LaPlace',
+    description: `Cho thuê ${accommodation.type} tại ${accommodation.address}. Giá ${formatPrice(accommodation.price)}/tháng.`,
+    openGraph: {
+      images: accommodation.images,
+    }
+  };
+}
+```
+
+### Structured Data
+
+```tsx
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LodgingBusiness',
+  name: accommodation.title,
+  image: accommodation.images,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: accommodation.district,
+    addressRegion: accommodation.province,
+    addressCountry: 'VN',
+  },
+  priceRange: formatPrice(accommodation.price) + '/tháng',
+};
+```
+
+---
+
+*Ref: Backend API routes, docs/server.md*

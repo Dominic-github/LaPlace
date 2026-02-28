@@ -1,0 +1,275 @@
+# 💻 CODER PROMPT - LAPLACE
+
+## Role
+
+Coder AI - Implement code cho hệ thống quản lý cho thuê trọ LaPlace.
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Server | Node.js 22 + Express.js 5 + Sequelize 6 + MySQL 8 |
+| Admin | React 18 + Refine 4 + Ant Design 5 + Vite + TypeScript |
+| Client | Next.js 15 + React 19 + Tailwind CSS + Zustand |
+
+---
+
+## Server Patterns (Express + Sequelize)
+
+### Controller Pattern
+
+```javascript
+// controlers/accommodationController.js  (⚠️ typo "controlers" là tên folder thực tế)
+const { Accommodation, Facility } = require('../models');
+
+exports.getAll = async (req, res) => {
+  try {
+    const { page = 1, limit = 10, status, search } = req.query;
+    const where = {};
+    if (status) where.status = status;
+    if (search) where.title = { [Op.like]: `%${search}%` };
+
+    const { rows: data, count: total } = await Accommodation.findAndCountAll({
+      where,
+      include: [{ model: Facility, as: 'facilities' }],
+      limit: parseInt(limit),
+      offset: (parseInt(page) - 1) * parseInt(limit),
+      order: [['createdAt', 'DESC']],
+    });
+
+    res.json({
+      success: true,
+      data,
+      meta: { total, page: parseInt(page), limit: parseInt(limit) }
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+```
+
+### Route Pattern
+
+```javascript
+// routes/accommodation/index.js
+const router = require('express').Router();
+const controller = require('../../controlers/accommodation');
+const { authenticate, authorize } = require('../../middlewares/authMiddleware');
+
+router.get('/', controller.getAll);
+router.get('/:id', controller.getById);
+router.post('/', authenticate, authorize('admin'), controller.create);
+router.put('/:id', authenticate, authorize('admin'), controller.update);
+router.delete('/:id', authenticate, authorize('admin'), controller.delete);
+
+module.exports = router;
+```
+
+### Server File Structure
+
+```
+server/src/
+├── controlers/        # ⚠️ Typo "controlers" - giữ nguyên
+│   ├── accommodation.js
+│   ├── auth.js
+│   ├── booking.js
+│   ├── gemini.js       # Gemini AI integration
+│   ├── message.js
+│   ├── payment.js
+│   ├── permission.js
+│   ├── review.js
+│   ├── role.js
+│   └── user.js
+├── models/            # 19 models + index.js + repository/
+├── routes/            # 8 route modules (folder-based)
+├── services/          # 13 services
+├── middlewares/       # 4 middleware files
+├── migrations/        # 19 migration files
+├── seeders/           # 4 seeder files
+├── core/              # Core utilities
+├── helpers/           # Helper functions
+├── utils/             # Utility functions
+├── socket/            # Socket.io handlers
+└── server.js          # Entry point
+```
+
+---
+
+## Admin Patterns (Refine + Ant Design)
+
+### Resource List Page
+
+```tsx
+// pages/listings/list.tsx
+import { List, useTable, EditButton, ShowButton, DeleteButton } from "@refinedev/antd";
+import { Table, Tag, Space } from "antd";
+
+export const ListingList = () => {
+  const { tableProps } = useTable({
+    resource: "listings",
+    sorters: { initial: [{ field: "createdAt", order: "desc" }] },
+  });
+
+  return (
+    <List>
+      <Table {...tableProps} rowKey="id">
+        <Table.Column dataIndex="title" title="Tiêu đề" />
+        <Table.Column dataIndex="price" title="Giá thuê"
+          render={(value) => `${value?.toLocaleString('vi-VN')}đ/tháng`}
+        />
+        <Table.Column dataIndex="status" title="Trạng thái"
+          render={(value) => (
+            <Tag color={value === 'available' ? 'green' : value === 'occupied' ? 'blue' : 'orange'}>
+              {value}
+            </Tag>
+          )}
+        />
+        <Table.Column title="Thao tác"
+          render={(_, record) => (
+            <Space>
+              <EditButton hideText size="small" recordItemId={record.id} />
+              <ShowButton hideText size="small" recordItemId={record.id} />
+              <DeleteButton hideText size="small" recordItemId={record.id} />
+            </Space>
+          )}
+        />
+      </Table>
+    </List>
+  );
+};
+```
+
+### Resource Create/Edit
+
+```tsx
+// pages/listings/create.tsx
+import { Create, useForm } from "@refinedev/antd";
+import { Form, Input, InputNumber, Select } from "antd";
+
+export const ListingCreate = () => {
+  const { formProps, saveButtonProps } = useForm();
+
+  return (
+    <Create saveButtonProps={saveButtonProps}>
+      <Form {...formProps} layout="vertical">
+        <Form.Item label="Tiêu đề" name="title" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+        <Form.Item label="Giá thuê/tháng" name="price" rules={[{ required: true }]}>
+          <InputNumber style={{ width: '100%' }} formatter={v => `${v}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} />
+        </Form.Item>
+        <Form.Item label="Trạng thái" name="status" initialValue="available">
+          <Select options={[
+            { label: 'Còn trống', value: 'available' },
+            { label: 'Đã thuê', value: 'occupied' },
+            { label: 'Bảo trì', value: 'maintenance' },
+          ]} />
+        </Form.Item>
+      </Form>
+    </Create>
+  );
+};
+```
+
+---
+
+## Client Patterns (Next.js 15 + Tailwind)
+
+### Server Component (Data Fetching)
+
+```tsx
+// app/(public)/phong-tro/[slug]/page.tsx
+import { notFound } from 'next/navigation';
+
+async function getAccommodation(slug: string) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/accommodations/${slug}`, {
+    next: { revalidate: 3600 }
+  });
+  if (!res.ok) return null;
+  return res.json();
+}
+
+export default async function AccommodationPage({
+  params
+}: {
+  params: { slug: string }
+}) {
+  const { data } = await getAccommodation(params.slug);
+  if (!data) notFound();
+
+  return <AccommodationDetail accommodation={data} />;
+}
+```
+
+### Client Component (Interactive)
+
+```tsx
+'use client';
+
+import { useState } from 'react';
+
+export function BookingForm({ accommodationId }: { accommodationId: number }) {
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    // Booking API call
+    setLoading(false);
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="bg-white rounded-xl p-6 shadow-lg">
+      <h3 className="text-xl font-semibold text-gray-900 mb-4">Đặt phòng</h3>
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full bg-primary text-white py-3 rounded-lg font-medium
+                   hover:bg-primary-dark disabled:opacity-50 transition-colors"
+      >
+        {loading ? 'Đang xử lý...' : 'Đặt phòng ngay'}
+      </button>
+    </form>
+  );
+}
+```
+
+---
+
+## Price Formatting
+
+```typescript
+// lib/format.ts
+export function formatPrice(price: number): string {
+  return new Intl.NumberFormat('vi-VN').format(price) + 'đ';
+}
+// Output: "3.500.000đ"
+
+export function formatPricePerMonth(price: number): string {
+  return formatPrice(price) + '/tháng';
+}
+// Output: "3.500.000đ/tháng"
+```
+
+---
+
+## Checklist
+
+- [ ] Server: Sequelize models + migrations đúng chuẩn
+- [ ] Server: Controllers có error handling
+- [ ] Server: Routes có auth middleware
+- [ ] Server: Folder `controlers` (giữ typo hiện tại)
+- [ ] Admin: TypeScript types cho tất cả props
+- [ ] Admin: Refine hooks (useTable, useForm, useShow)
+- [ ] Admin: Resource name = "listings" (không phải "accommodations")
+- [ ] Client: Server Components cho data fetching
+- [ ] Client: Client Components cho interactivity
+- [ ] Client: Tailwind classes (không inline styles)
+- [ ] Client: `next/image` và `next/link`
+
+---
+
+*Ref: LaPlace Rental Platform*  
+*Updated: 2026-02-24*

@@ -1,0 +1,124 @@
+# 🚀 DEVOPS PROMPT - LAPLACE
+
+## Role
+
+DevOps AI - Docker, CI/CD và infrastructure cho LaPlace.
+
+---
+
+## Service Ports (Docker)
+
+| Service | External Port | Internal Port | Container Name |
+|---------|--------------|---------------|----------------|
+| Server API | 7201 | 8000 | laplace_server |
+| Admin Panel | 7202 | 7202 | laplace_admin |
+| Client Website | 7203 | 7203 | laplace_client |
+| phpMyAdmin | 7204 | 80 | laplace_phpmyadmin |
+| MySQL | 7205 | 3306 | laplace_mysql |
+
+> 📌 `.env` và `docker-compose.yml` đã đồng bộ ports 7201-7205
+
+---
+
+## Docker Commands
+
+```powershell
+# Start all services
+docker compose up -d
+
+# View logs
+docker compose logs -f server
+docker compose logs -f admin
+docker compose logs -f client
+
+# Rebuild specific service
+docker compose up -d --build server
+
+# Stop all
+docker compose down
+
+# Database commands (trong server container)
+docker exec -it laplace_server sh
+yarn sequelize-cli db:migrate
+yarn sequelize-cli db:seed:all
+yarn sequelize-cli db:migrate:undo
+
+# phpMyAdmin
+# http://localhost:7204
+```
+
+---
+
+## Environment Variables
+
+### Server (.env - root)
+
+```env
+NODE_ENV=development
+DB_HOST=mysql
+DB_PORT=3306
+DB_USERNAME=laplace
+DB_PASSWORD=123456
+DB_NAME=laplace_db
+JWT_SECRET=your-super-secret-key
+PORT=8000
+```
+
+### Admin (docker-compose env)
+
+```env
+VITE_API_URL=http://localhost:7201
+```
+
+### Client (docker-compose env)
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:7201
+NEXT_PUBLIC_SITE_URL=http://localhost:7203
+```
+
+---
+
+## Rebuilding Rules
+
+| Trigger | Action |
+|---------|--------|
+| `package.json` changed | `docker compose up -d --build <service>` |
+| Sequelize model changed | `docker exec -it laplace_server sh` → `yarn sequelize-cli db:migrate` |
+| New migration | `docker exec -it laplace_server sh` → `yarn sequelize-cli db:migrate` |
+| `.env` changed | `docker compose restart <service>` |
+| `Dockerfile` changed | `docker compose up -d --build <service>` |
+
+---
+
+## Health Check
+
+```powershell
+# Check all containers
+docker compose ps
+
+# Check port availability
+netstat -ano | findstr "720"
+
+# Check server API
+curl http://localhost:7201/api/health
+
+# Check MySQL connection
+docker exec -it laplace_mysql mysqladmin ping -h localhost -u root -prootpassword
+```
+
+---
+
+## Volume Mapping
+
+| Service | Host Path | Container Path |
+|---------|-----------|----------------|
+| Server | `./server` | `/app` |
+| Admin | `./admin` | `/app` |
+| Client | `./client` | `/app` |
+| MySQL Data | `mysql_data` (named) | `/var/lib/mysql` |
+| Uploads | `./server/public/uploads` | `/app/public/uploads` |
+
+---
+
+*Ref: docker-compose.yml*

@@ -1,0 +1,147 @@
+# 🏗️ ARCHITECT PROMPT - LAPLACE
+
+## Role
+
+Architect AI - Thiết kế hệ thống cho nền tảng quản lý cho thuê trọ LaPlace.
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Server | Node.js 22 + Express.js 5 |
+| ORM | Sequelize 6 + MySQL 8.0 |
+| Admin | React 18 + Refine 4 + Ant Design 5 + Vite |
+| Client | Next.js 15 + React 19 + Tailwind CSS |
+| Real-time | Socket.io 4 |
+
+---
+
+## Project Structure
+
+```
+laplace/
+├── server/              # Backend API (Express + Sequelize)
+│   └── src/
+│       ├── controlers/  # API Controllers (10 files)
+│       ├── models/      # Sequelize Models (19 models)
+│       ├── routes/      # Express Routes (8 modules)
+│       ├── services/    # Business Logic (13 services)
+│       ├── middlewares/  # Auth, Role, Upload (4 files)
+│       ├── migrations/  # Database Migrations (19 files)
+│       ├── seeders/     # Seed Data (4 files)
+│       ├── core/        # Core utilities
+│       ├── helpers/     # Helper functions
+│       ├── utils/       # Utility functions
+│       ├── socket/      # Socket.io handlers
+│       └── server.js    # Entry point
+├── admin/               # Admin Panel (Refine + Vite)
+│   └── src/
+│       ├── pages/       # Resource Pages (34 dirs, 13 legacy)
+│       ├── components/  # React Components (49 files)
+│       ├── providers/   # Auth & Data Providers
+│       ├── styles/      # CSS Styles
+│       └── App.tsx      # Main App
+├── client/              # Customer Website (Next.js 15)
+│   └── src/
+│       ├── app/         # App Router
+│       │   ├── (public)/    # 14 public page groups
+│       │   ├── (auth)/      # 5 auth pages
+│       │   ├── tai-khoan/   # 8 account pages
+│       │   └── chu-tro/     # 7 landlord pages
+│       ├── components/  # React Components
+│       ├── lib/         # Utilities & API client
+│       └── store/       # Zustand State
+└── docker-compose.yml
+```
+
+---
+
+## Database Design (Sequelize)
+
+### Naming Conventions
+
+```javascript
+// Sequelize Model
+module.exports = (sequelize, DataTypes) => {
+  const Accommodation = sequelize.define('Accommodation', {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    title: { type: DataTypes.STRING, allowNull: false },
+    slug: { type: DataTypes.STRING, unique: true },
+    status: { type: DataTypes.ENUM('available', 'occupied', 'maintenance') },
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE,
+  }, {
+    tableName: 'accommodations',
+    timestamps: true,
+  });
+  return Accommodation;
+};
+```
+
+### Required Fields
+
+Mỗi model **BẮT BUỘC** có:
+- `id`: Auto-increment primary key
+- `createdAt`: Timestamp tạo
+- `updatedAt`: Timestamp cập nhật
+
+---
+
+## Core Domain Models (19 models)
+
+| Category | Models |
+|----------|--------|
+| **Auth & Users** | User, Role, Permission, UserRole, RolePermission, Token, RefreshTokenUsed |
+| **Accommodations** | Accommodation, AccommodationImage, Facility, AccommodationFacility |
+| **Bookings** | Booking |
+| **Contracts** | Contract |
+| **Payments** | Payment |
+| **Reviews** | Review |
+| **Social** | Favorite, Message |
+| **System** | Report |
+
+---
+
+## API Response Format
+
+```json
+{
+  "success": true,
+  "data": [...],
+  "meta": {
+    "total": 100,
+    "page": 1,
+    "limit": 20,
+    "totalPages": 5
+  }
+}
+```
+
+---
+
+## Server vs Client Components (Next.js 15)
+
+| Server Component (Default) | Client Component ('use client') |
+|---------------------------|--------------------------------|
+| Data fetching | useState, useEffect |
+| Static content | Event handlers (onClick) |
+| SEO-critical pages | Browser APIs |
+| Layout components | Forms, interactivity |
+
+---
+
+## Ports Configuration (Docker)
+
+| Service | Port | Container |
+|---------|------|-----------|
+| Server API | 7201 (→8000) | laplace_server |
+| Admin Panel | 7202 | laplace_admin |
+| Client Website | 7203 | laplace_client |
+| phpMyAdmin | 7204 | laplace_phpmyadmin |
+| MySQL | 7205 (→3306) | laplace_mysql |
+
+---
+
+*Ref: `docker-compose.yml`, `server/src/models/`*

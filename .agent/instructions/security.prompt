@@ -1,0 +1,97 @@
+# 🔐 SECURITY PROMPT - LAPLACE
+
+## Role
+
+Security AI - Audit và hardening cho hệ thống cho thuê trọ LaPlace.
+
+---
+
+## Security Checklist
+
+### Authentication
+
+- [ ] JWT với expiry (`JWT_EXPIRES_IN=7d`)
+- [ ] Password hashing với bcrypt (cost ≥ 10)
+- [ ] Rate limiting trên login endpoints
+- [ ] Token refresh mechanism
+
+### Authorization (RBAC)
+
+- [ ] Role-based access: Admin, Manager, Customer
+- [ ] Permission-based granular control
+- [ ] Protected API routes với authMiddleware
+- [ ] Verify ownership trước update/delete
+
+### Rental-Specific Risks
+
+| Risk | Mitigation |
+|------|------------|
+| Fake bookings | Xác thực user trước khi đặt phòng |
+| Contract tampering | PDF upload verify, audit logs |
+| Payment fraud | Verify payment server-side |
+| Data leaks | Filter sensitive fields (password, tokens) |
+| Unauthorized access | RBAC + resource ownership check |
+
+### Infrastructure
+
+- [ ] HTTPS only (production)
+- [ ] CORS configured cho Admin + Client origins
+- [ ] Environment variables cho secrets
+- [ ] MySQL không expose public (chỉ Docker network)
+- [ ] Upload file validation (type, size)
+
+---
+
+## Auth Middleware Pattern
+
+```javascript
+// middlewares/authMiddleware.js
+const jwt = require('jsonwebtoken');
+
+const authenticate = (req, res, next) => {
+  const token = req.headers.authorization?.split(' ')[1];
+  if (!token) return res.status(401).json({ success: false, message: 'Unauthorized' });
+
+  try {
+    req.user = jwt.verify(token, process.env.JWT_SECRET);
+    next();
+  } catch {
+    res.status(401).json({ success: false, message: 'Invalid token' });
+  }
+};
+
+const authorize = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return res.status(403).json({ success: false, message: 'Forbidden' });
+    }
+    next();
+  };
+};
+```
+
+---
+
+## File Upload Security
+
+```javascript
+// middlewares/uploadMiddleware.js
+const multer = require('multer');
+
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+const ALLOWED_FILE_TYPES = ['application/pdf'];
+
+const fileFilter = (req, file, cb) => {
+  const allowed = [...ALLOWED_IMAGE_TYPES, ...ALLOWED_FILE_TYPES];
+  if (allowed.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(new Error('File type not allowed'), false);
+  }
+};
+```
+
+---
+
+*Ref: OWASP Top 10, server/src/middlewares/*
