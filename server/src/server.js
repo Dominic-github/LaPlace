@@ -15,9 +15,20 @@ import { errorMiddleware } from './middlewares/errorHandling.js'
 const PORT = parseInt(process.env.APP_PORT || process.env.PORT || '8000')
 const app = express()
 
+const allowedOrigins = (process.env.CORS_ORIGINS || 'http://localhost:7202,http://localhost:7203,http://localhost:5173,http://localhost:3000,http://localhost:8000')
+  .split(',')
+  .map(s => s.trim())
+
 app.use(
   cors({
-    origin: process.env.APP_URL,
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true)
+      // Allow localhost in development, or if in explicit list
+      if (allowedOrigins.includes(origin) || origin.startsWith('http://localhost:')) {
+        return callback(null, true)
+      }
+      return callback(new Error('Not allowed by CORS'))
+    },
     credentials: true
   })
 )
@@ -94,7 +105,7 @@ const server = app.listen(PORT, '0.0.0.0', () => {
 
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL,
+    origin: allowedOrigins,
     credentials: true
   }
 })

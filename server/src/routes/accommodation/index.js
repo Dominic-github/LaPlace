@@ -7,6 +7,7 @@ import {
 } from '@/middlewares/authentication.js'
 
 router.get('/', accommodationControler.getAllAccommodations)
+router.get('/featured', accommodationControler.getFeatured)
 router.get('/:accommodation_id', accommodationControler.getAccommodationById)
 
 

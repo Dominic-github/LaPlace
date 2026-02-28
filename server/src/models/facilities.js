@@ -8,7 +8,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Facilities.belongsToMany(models.accommodations, {
+        through: models.accommodation_facilities,
+        foreignKey: 'facility_id',
+        otherKey: 'accommodation_id',
+        as: 'accommodations'
+      })
     }
   }
   Facilities.init(

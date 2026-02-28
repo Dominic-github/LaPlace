@@ -7,7 +7,15 @@ class AccommodationController {
     OK(
       res,
       'Accommodations fetched successfully',
-      await accommodationService.getAllAccommodations()
+      await accommodationService.getAllAccommodations(req.query)
+    )
+  })
+
+  getFeatured = catchAsync(async (req, res) => {
+    OK(
+      res,
+      'Featured accommodations fetched successfully',
+      await accommodationService.getFeatured(req.query.limit)
     )
   })
 

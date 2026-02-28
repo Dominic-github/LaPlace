@@ -62,6 +62,18 @@ class AuthService {
     }
     delete user.password
 
+    try {
+      const { getUserRole } = await import('@/models/repository/role')
+      const userRole = await getUserRole(user.user_id)
+      if (userRole && userRole.name) {
+        user.dataValues.role = userRole.name
+      } else {
+        user.dataValues.role = type
+      }
+    } catch (err) {
+      user.dataValues.role = type
+    }
+
     const { publicKey, privateKey } = await TokenService.createKey()
 
     const user_id = user.user_id
@@ -100,7 +112,6 @@ class AuthService {
       throw new Api403Error('User not found')
     }
 
-    refre
 
     const delKey = await TokenService.deleteTokenById(user_id)
     if (delKey === 1) {
@@ -179,13 +190,12 @@ class AuthService {
     if (!user) {
       throw new Api403Error('User with this email not found')
     }
-    
 
-    const email = await new EmailService({
-      from: from,
+
+    await new EmailService({
       to: email,
-      name: email,
-      type: ''
+      name: user.fullname || user.email,
+      type: 'forgetPassword'
     }).sendForgetPasswordMail({
       to: email,
       name: user.fullname || user.email,

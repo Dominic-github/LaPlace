@@ -45,7 +45,13 @@
     "dev": "nodemon --exec babel-node src/server.js",
     "watch:build": "webpack --watch --mode development",
     "watch:server": "nodemon --watch dist dist/main.js",
-    "lint": "eslint . --ext .js"
+    "lint": "eslint . --ext .js",
+    "seed:all": "babel-node src/seeders/seed-all.js",
+    "seed:all:yes": "babel-node src/seeders/seed-all.js --yes",
+    "db:migrate": "sequelize-cli db:migrate",
+    "db:migrate:undo": "sequelize-cli db:migrate:undo",
+    "db:seed": "sequelize-cli db:seed:all",
+    "db:reset": "sequelize-cli db:migrate:undo:all && sequelize-cli db:migrate && npm run seed:all:yes"
   },
   "browserslist": {
     "production": [
